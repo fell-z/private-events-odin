@@ -1,0 +1,11 @@
+<h1>Events</h1>
+
+<div class="events-container">
+  <% @events.each do |e| %>
+    <div class="event">
+      <h4><%= e.name %></h4>
+
+      <%= link_to "See more", e %>
+    </div>
+  <% end %>
+</div>
