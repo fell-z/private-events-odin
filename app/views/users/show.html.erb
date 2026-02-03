@@ -1,0 +1,12 @@
+<h1>User Profile</h1>
+
+<h2>Created Events</h2>
+<div class="events-container">
+  <% @created_events.each do |e| %>
+    <div class="event">
+      <h4><%= e.name %></h4>
+
+      <%= link_to "See more", e %>
+    </div>
+  <% end %>
+</div>
