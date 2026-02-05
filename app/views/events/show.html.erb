@@ -3,8 +3,24 @@
 <%= link_to "Home", root_path %>
 <%= link_to "Back", :back %>
 
-<h2>Event name: <%= @event.name %></h2>
+<p>Creator: <%= @event.creator.name %></p>
+
+<p>Event name: <%= @event.name %></p>
 
 <p>Location: <%= @event.location %></p>
 
 <p>Date: <%= @event.date.to_fs :long %></p>
+
+<p>
+  Attendees:
+
+  <% if user_signed_in? %>
+    <%= button_to "Attend this event", event_attendances_path, params: { event_id: @event.id } %>
+  <% end %>
+
+  <ul>
+    <% @event.attendees.each do |a| %>
+      <li><%= a.name %></li>
+    <% end %>
+  </ul>
+</p>
