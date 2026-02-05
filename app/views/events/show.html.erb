@@ -3,7 +3,7 @@
 <%= link_to "Home", root_path %>
 <%= link_to "Back", :back %>
 
-<p>Creator: <%= @event.creator.name %></p>
+<p>Creator: <%= link_to @event.creator.name, @event.creator %></p>
 
 <p>Event name: <%= @event.name %></p>
 
