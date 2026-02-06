@@ -4,12 +4,11 @@
 <%= link_to "Back", :back %>
 
 <h2>Created Events</h2>
-<div class="events-container">
-  <% @user.created_events.each do |e| %>
-    <div class="event">
-      <h4><%= e.name %></h4>
+<ul class="created-events">
+  <%= render partial: "shared/event", collection: @user.created_events %>
+</ul>
 
-      <%= link_to "See more", e %>
-    </div>
-  <% end %>
-</div>
+<h2>Attended Events</h2>
+<ul class="attended-events">
+  <%= render partial: "shared/event", collection: @user.attended_events %>
+</ul>
