@@ -16,5 +16,9 @@
 
 <h2>Events</h2>
 <ul class="events">
-  <%= render partial: "shared/event", collection: @events %>
+  <h3>Past</h3>
+  <%= render partial: "shared/event", collection: @past_events %>
+
+  <h3>Upcoming</h3>
+  <%= render partial: "shared/event", collection: @upcoming_events %>
 </ul>
