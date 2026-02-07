@@ -1,4 +1,4 @@
-<h1>User Profile</h1>
+<h1>User Profile: <%= @user.name %></h1>
 
 <%= link_to "Home", root_path %>
 <%= link_to "Back", :back %>
@@ -10,5 +10,9 @@
 
 <h2>Attended Events</h2>
 <ul class="attended-events">
-  <%= render partial: "shared/event", collection: @user.attended_events %>
+  <h3>Past</h3>
+  <%= render partial: "shared/event", collection: @user.attended_events.where("date < ?", Time.now.midnight) %>
+
+  <h3>Upcoming</h3>
+  <%= render partial: "shared/event", collection: @user.attended_events.where("date >= ?", Time.now.midnight) %>
 </ul>
