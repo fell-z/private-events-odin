@@ -3,11 +3,6 @@ class Event < ApplicationRecord
   has_many :event_attendances, foreign_key: :attended_event_id
   has_many :attendees, through: :event_attendances
 
-  def self.past
-    where("date < ?", Time.now.midnight)
-  end
-
-  def self.upcoming
-    where("date >= ?", Time.now.midnight)
-  end
+  scope :past, -> { where("date < ?", Time.now.midnight) }
+  scope :upcoming, -> { where("date >= ?", Time.now.midnight) }
 end

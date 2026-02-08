@@ -11,8 +11,8 @@
 <h2>Attended Events</h2>
 <ul class="attended-events">
   <h3>Past</h3>
-  <%= render partial: "shared/event", collection: @user.attended_events.where("date < ?", Time.now.midnight) %>
+  <%= render partial: "shared/event", collection: @user.attended_events.past %>
 
   <h3>Upcoming</h3>
-  <%= render partial: "shared/event", collection: @user.attended_events.where("date >= ?", Time.now.midnight) %>
+  <%= render partial: "shared/event", collection: @user.attended_events.upcoming %>
 </ul>
