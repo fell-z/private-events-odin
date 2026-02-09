@@ -5,4 +5,6 @@ class Event < ApplicationRecord
 
   scope :past, -> { where("date < ?", Time.now.midnight) }
   scope :upcoming, -> { where("date >= ?", Time.now.midnight) }
+
+  enum :status, { public: 0, private: 1 }, default: :private, suffix: true
 end

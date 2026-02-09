@@ -1,6 +1,9 @@
 <main>
   <h1>New Event</h1>
 
+  <%= link_to "Home", root_path %>
+  <%= link_to "Back", :back %>
+
   <%= form_with model: @event do |f| %>
     <div>
       <%= f.label :name do |text| %>
@@ -20,6 +23,13 @@
       <%= f.label :date do |text| %>
         <%= text %>
         <%= f.datetime_local_field :date %>
+      <% end %>
+    </div>
+
+    <div>
+      <%= f.label :status do |text| %>
+        <%= text %>
+        <%= f.select :status, Event.statuses.keys.collect { |k| [k.humanize, k] }, selected: @event.status %>
       <% end %>
     </div>
 
