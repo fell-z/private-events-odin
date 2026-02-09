@@ -7,6 +7,14 @@ class EventAttendancesController < ApplicationController
     end
   end
 
+  def destroy
+    @event_attendance = EventAttendance.find_by(attended_event_id: params[:event_id], attendee_id: params[:attendee_id])
+
+    @event_attendance.destroy
+
+    redirect_to root_path, status: :see_other
+  end
+
   private
 
   def attendee_params

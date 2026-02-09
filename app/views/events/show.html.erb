@@ -33,6 +33,14 @@
         <%= f.select :attendee_ids, User.excluding(@event.attendees, @event.creator).collect { |u| [u.name, u.id] }, multiple: true %>
         <%= f.button "Invite selected users" %>
       <% end %>
+    <% elsif @event.attendees.exists?(current_user.id) %>
+      <%= button_to "Stop attending this event",
+      event_attendance_path,
+      method: :delete,
+      params: {
+        event_id: @event.id,
+        attendee_id: current_user.id,
+      } %>
     <% elsif @event.public_status? %>
       <%= button_to "Attend this event", event_attendances_path, params: { event_id: @event.id, attendee_ids: [current_user.id] } %>
     <% end %>
