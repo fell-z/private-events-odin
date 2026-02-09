@@ -1,0 +1,33 @@
+<%= form_with model: event do |f| %>
+  <div>
+    <%= f.label :name do |text| %>
+      <%= text %>
+      <%= f.text_field :name, required: true %>
+    <% end %>
+  </div>
+
+  <div>
+    <%= f.label :location do |text| %>
+      <%= text %>
+      <%= f.text_field :location, required: true %>
+    <% end %>
+  </div>
+
+  <div>
+    <%= f.label :date do |text| %>
+      <%= text %>
+      <%= f.datetime_local_field :date, required: true %>
+    <% end %>
+  </div>
+
+  <div>
+    <%= f.label :status do |text| %>
+      <%= text %>
+      <%= f.select :status, Event.statuses.keys.collect { |k| [k.humanize, k] }, selected: event.status %>
+    <% end %>
+  </div>
+
+  <div>
+    <%= f.button event.persisted? ? "Update Event" : "Create Event" %>
+  </div>
+<% end %>

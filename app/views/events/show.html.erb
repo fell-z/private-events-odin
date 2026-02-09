@@ -11,8 +11,19 @@
 
 <p>Date: <%= @event.date.to_fs :long %></p>
 
+<% if user_signed_in? && current_user == @event.creator %>
+  <%= link_to "Edit event", edit_event_path(@event) %>
+  <%= link_to "Delete event", @event, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+<% end %>
+
 <p>
   Attendees:
+
+  <ul>
+    <% @event.attendees.each do |a| %>
+      <li><%= a.name %></li>
+    <% end %>
+  </ul>
 
   <% if user_signed_in? %>
     <% if current_user == @event.creator %>
@@ -26,10 +37,4 @@
       <%= button_to "Attend this event", event_attendances_path, params: { event_id: @event.id, attendee_ids: [current_user.id] } %>
     <% end %>
   <% end %>
-
-  <ul>
-    <% @event.attendees.each do |a| %>
-      <li><%= a.name %></li>
-    <% end %>
-  </ul>
 </p>

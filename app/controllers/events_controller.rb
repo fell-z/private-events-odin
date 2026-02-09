@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
   before_action :authenticate_user!, only: %i[ new create ]
+  before_action :set_event, except: %i[ index new create ]
 
   def index
     @past_events = Event.past
@@ -22,11 +23,31 @@ class EventsController < ApplicationController
     end
   end
 
+  def edit
+  end
+
+  def update
+    if @event.update(event_params)
+      redirect_to @event
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
   def show
-    @event = Event.find(params[:id])
+  end
+
+  def destroy
+    @event.destroy
+
+    redirect_to root_path, status: :see_other
   end
 
   private
+
+  def set_event
+    @event = Event.find(params[:id])
+  end
 
   def event_params
     params.expect(event: [ :name, :location, :date, :status ])
