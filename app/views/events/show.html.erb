@@ -30,7 +30,7 @@
       <%= form_with url: event_attendances_path do |f| %>
         <%= f.hidden_field :event_id, value: @event.id %>
         <%# This select multiple done by Rails helpers is weird %>
-        <%= f.select :attendee_ids, User.excluding(@event.attendees, @event.creator).collect { |u| [u.name, u.id] }, multiple: true %>
+        <%= f.select :new_attendee_ids, @non_attendees_options, multiple: true %>
         <%= f.button "Invite selected users" %>
       <% end %>
     <% elsif @event.attendees.exists?(current_user.id) %>
@@ -42,7 +42,7 @@
         attendee_id: current_user.id,
       } %>
     <% elsif @event.public_status? %>
-      <%= button_to "Attend this event", event_attendances_path, params: { event_id: @event.id, attendee_ids: [current_user.id] } %>
+      <%= button_to "Attend this event", event_attendances_path, params: { event_id: @event.id, new_attendee_ids: [current_user.id] } %>
     <% end %>
   <% end %>
 </p>

@@ -1,6 +1,6 @@
 class EventAttendancesController < ApplicationController
   def create
-    Event.find(params[:event_id]).attendees << User.find(attendee_params)
+    Event.find(params[:event_id]).attendees << User.find(new_attendee_params)
 
     respond_to do |format|
       format.js { render inline: "location.reload();" }
@@ -17,9 +17,9 @@ class EventAttendancesController < ApplicationController
 
   private
 
-  def attendee_params
+  def new_attendee_params
     # Weird behavior that, when using a select multiple html tag,
     # includes a empty string even if there is a selected value.
-    params.expect(attendee_ids: []).reject(&:blank?)
+    params.expect(new_attendee_ids: []).reject(&:blank?)
   end
 end

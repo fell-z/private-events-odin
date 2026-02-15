@@ -35,6 +35,7 @@ class EventsController < ApplicationController
   end
 
   def show
+    @non_attendees_options = User.excluding(@event.attendees, @event.creator).collect { |u| [ u.name, u.id ] }
   end
 
   def destroy
